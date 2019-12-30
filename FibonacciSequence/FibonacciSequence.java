@@ -27,21 +27,14 @@ public class FibonacciSequence {
 		int lastVal = list.get(list.size() - 1);
 		int numOfFib = 0;
 		if (lastVal == val) return list.size();
-		if (lastVal < val) {
-			while(lastVal < val) {
-				lastVal = findFib(list.size());
-			}
-			numOfFib = (lastVal == val) ? list.size() : list.size() - 1;
-		} else {
-			int i = list.size() - 1;
-			lastVal = list.get(i);
-			while(lastVal > val) {
-				i--;
-				lastVal = list.get(i);
-			}
-			numOfFib = i + 1;
+		while(lastVal < val) {
+			lastVal = findFib(list.size());
 		}
-		return numOfFib;
+		int i = 0;
+		for (; i < list.size(); i++) {
+			if (list.get(i) >= val) break;
+		}
+		return (list.get(i) == val) ? i + 1 : i;
 	}
 	
 	public boolean isFib(int val) {
@@ -54,7 +47,7 @@ public class FibonacciSequence {
 		int bNum = findNumOfFib(b);
 		System.out.println("b: " + b + " Num: " + bNum + " isFib : " + isFib(b));
 		int diff = Math.abs(aNum - bNum);
-		if (isFib(a) || isFib(b)) {
+		if (isFib(a)) {
 			diff++;
 		}
 	for(int i = 0; i < list.size(); i++) System.out.print("[" + i + "]" + list.get(i) + " ");
