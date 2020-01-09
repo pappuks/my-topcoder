@@ -1,3 +1,4 @@
+import java.util.*;
 public class ThreeProgrammers {
 	
 	private final String impossible = "impossible";
@@ -31,12 +32,12 @@ public class ThreeProgrammers {
 	
 	public static void main(String[] args) {
 		ThreeProgrammers tp = new ThreeProgrammers();
-		//System.out.println(tp.validCodeHistory("CAB"));
-		//System.out.println(tp.validCodeHistory("BB"));
-		//System.out.println(tp.validCodeHistory("CBB"));
-		//System.out.println(tp.validCodeHistory("CAC"));
-		//System.out.println(tp.validCodeHistory("ACAC"));
-		//System.out.println(tp.validCodeHistory("ACABC"));
+		System.out.println(tp.validCodeHistory("CAB"));
+		System.out.println(tp.validCodeHistory("BB"));
+		System.out.println(tp.validCodeHistory("CBB"));
+		System.out.println(tp.validCodeHistory("CAC"));
+		System.out.println(tp.validCodeHistory("ACAC"));
+		System.out.println(tp.validCodeHistory("ACABC"));
 		System.out.println(tp.validCodeHistory("BAABCABBCCACBAACABAABABBCCAACABCCAACCABCACACCBABAB"));
 	}
 	
@@ -57,8 +58,12 @@ public class ThreeProgrammers {
 		if (a == 0 && b == 0 && c == 0) {
 			return code;
 		}
-		MyKey mk = new MyKey(
-		if (cache.contains(
+		if (code.length() > 2) {
+			MyKey mk = new MyKey(code.substring(code.length() - 2), a, b, c);
+			if (cache.contains(mk)) {
+				return impossible;
+			}
+		}
 		String retValA = impossible;
 		String retValB = impossible;
 		String retValC = impossible;
@@ -75,24 +80,28 @@ public class ThreeProgrammers {
 		}
 		
 		if (!retValA.equals(impossible)) {
-			System.out.println(" code:" + code + " A:" + a + " B:" + b + " C:" + c);
-			System.out.println("	retValB:" + retValB);
-			System.out.println("	retValC:" + retValC);
+			//System.out.println(" code:" + code + " A:" + a + " B:" + b + " C:" + c);
+			//System.out.println("	retValB:" + retValB);
+			//System.out.println("	retValC:" + retValC);
 			return retValA;
 		}
 		if (!retValB.equals(impossible)) {
-			System.out.println(" code:" + code + " A:" + a + " B:" + b + " C:" + c);
-			System.out.println("	retValA:" + retValA);
-			System.out.println("	retValC:" + retValC);
+			//System.out.println(" code:" + code + " A:" + a + " B:" + b + " C:" + c);
+			//System.out.println("	retValA:" + retValA);
+			//System.out.println("	retValC:" + retValC);
 			return retValB;
 		}
 		if (!retValC.equals(impossible)) {
-			System.out.println(" code:" + code + " A:" + a + " B:" + b + " C:" + c);
-			System.out.println("	retValA:" + retValA);
-			System.out.println("	retValB:" + retValB);
+			//System.out.println(" code:" + code + " A:" + a + " B:" + b + " C:" + c);
+			//System.out.println("	retValA:" + retValA);
+			//System.out.println("	retValB:" + retValB);
 			return retValC;
 		}
-		System.out.println(" code:" + code + " A:" + a + " B:" + b + " C:" + c);
+		//System.out.println(" code:" + code + " A:" + a + " B:" + b + " C:" + c);
+		if (code.length() > 2) {
+			MyKey mk = new MyKey(code.substring(code.length() - 2), a, b, c);
+			cache.add(mk);
+		}
 		return impossible;
 		
 	}
